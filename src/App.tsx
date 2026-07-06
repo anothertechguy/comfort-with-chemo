@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { motion, useInView, useScroll, useTransform, animate } from "framer-motion";
 import {
@@ -14,11 +13,7 @@ import story from "@/assets/story.jpg";
 import founder from "@/assets/founder.jpg";
 import ctaImg from "@/assets/cta.jpg";
 
-export const Route = createFileRoute("/")({
-  component: Index,
-});
-
-function Index() {
+export default function App() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-clip">
       <Header />
@@ -72,7 +67,7 @@ function Header() {
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-10 flex items-center justify-between h-20">
         <a href="#top" className="flex items-center gap-3">
-          <img src={logo} alt="Comfort With Chemotherapy" className="h-11 w-auto" />
+          <img src={logo} alt="Comfort With Chemotherapy" className="h-11 w-auto" fetchPriority="high" decoding="sync" />
         </a>
         <nav className="hidden lg:flex items-center gap-9 text-sm text-foreground/75">
           {NAV.map((n) => (
@@ -245,6 +240,8 @@ function Hero() {
               className="h-full w-full object-cover"
               width={1920}
               height={1280}
+              fetchPriority="high"
+              decoding="sync"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
           </motion.div>
