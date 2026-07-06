@@ -203,14 +203,14 @@ function Hero() {
         </div>
 
         <div className="relative animate-fade-up" style={{ animationDelay: "0.15s" }}>
-          <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-glow">
+          <div className="relative">
             <img
               src={heroDiverse}
               alt="A smiling volunteer presenting a comfort box to a patient"
-              className="h-full w-full object-cover"
+              className="w-full aspect-[4/5] object-cover rounded-[2rem] shadow-glow"
               fetchPriority="high"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent rounded-[2rem] pointer-events-none" />
           </div>
 
           <div className="absolute -left-6 md:-left-10 bottom-10 bg-card/95 backdrop-blur rounded-2xl p-5 shadow-soft border border-border/60 max-w-[240px]">
@@ -518,8 +518,8 @@ function Stories() {
         </Reveal>
 
         <div className="mt-14 grid lg:grid-cols-[1fr_1.2fr] gap-10 lg:gap-16 items-center">
-          <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-soft">
-            <img key={s.img} src={s.img} alt="" loading="lazy" className="h-full w-full object-cover transition-opacity duration-700" />
+          <div className="relative">
+            <img key={s.img} src={s.img} alt="" loading="lazy" className="w-full aspect-[4/5] object-cover rounded-[2rem] shadow-soft transition-opacity duration-700" />
           </div>
 
           <div>
