@@ -1,24 +1,23 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
-import { motion, useInView, useScroll, useTransform, animate } from "framer-motion";
+import { useEffect, useState, type ReactNode } from "react";
 import {
-  Heart, HandHeart, Sparkles, ArrowUpRight,
-  Leaf, MessageCircle, Coffee, BookOpen, Send, Menu, X,
+  Heart, HandHeart, Sparkles, ArrowRight, ArrowUpRight,
+  Gift, Users, Leaf, MessageCircle, Coffee, BookOpen, Send, Menu, X,
   Phone, Mail, Facebook, Instagram, Linkedin, Twitter,
 } from "lucide-react";
-import logo from "@/assets/logo.png";
-import heroDiverse from "@/assets/hero_diverse.jpg";
-import welcomeChild from "@/assets/welcome_child.jpg";
-import ctaDiverse from "@/assets/cta_diverse.jpg";
-import testimonialMarisol from "@/assets/testimonial_marisol.jpg";
-import testimonialDavid from "@/assets/testimonial_david.jpg";
-import testimonialPriya from "@/assets/testimonial_priya.jpg";
-import boxComfort from "@/assets/box_comfort.jpg";
-import boxSelfCare from "@/assets/box_selfcare.jpg";
-import boxHydration from "@/assets/box_hydration.jpg";
-import boxRelaxation from "@/assets/box_relaxation.jpg";
-import boxEntertainment from "@/assets/box_entertainment.jpg";
-import boxNotes from "@/assets/box_notes.jpg";
-import boxResources from "@/assets/box_resources.jpg";
+import logo from "./assets/logo.png";
+import heroDiverse from "./assets/hero_diverse.jpg";
+import welcomeChild from "./assets/welcome_child.jpg";
+import ctaDiverse from "./assets/cta_diverse.jpg";
+import testimonialMarisol from "./assets/testimonial_marisol.jpg";
+import testimonialDavid from "./assets/testimonial_david.jpg";
+import testimonialPriya from "./assets/testimonial_priya.jpg";
+import boxComfort from "./assets/box_comfort.jpg";
+import boxSelfCare from "./assets/box_selfcare.jpg";
+import boxHydration from "./assets/box_hydration.jpg";
+import boxRelaxation from "./assets/box_relaxation.jpg";
+import boxEntertainment from "./assets/box_entertainment.jpg";
+import boxNotes from "./assets/box_notes.jpg";
+import boxResources from "./assets/box_resources.jpg";
 
 export default function App() {
   return (
@@ -62,19 +61,16 @@ function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   return (
-    <motion.header
-      initial={{ y: -30, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={`sticky top-0 z-50 transition-all duration-500 ${
+    <header
+      className={`sticky top-0 z-50 transition-all duration-500 animate-fade-down ${
         scrolled
-          ? "backdrop-blur-xl bg-background/80 border-b border-border/60 shadow-[0_4px_20px_-8px_hsla(38,40%,40%,0.15)]"
+          ? "backdrop-blur-xl bg-background/80 border-b border-border/60 shadow-soft"
           : "bg-transparent"
       }`}
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-10 flex items-center justify-between h-20">
         <a href="#top" className="flex items-center gap-3">
-          <img src={logo} alt="Comfort With Chemotherapy" className="h-11 w-auto" fetchPriority="high" decoding="sync" />
+          <img src={logo} alt="Comfort With Chemotherapy" className="h-11 w-auto" />
         </a>
         <nav className="hidden lg:flex items-center gap-9 text-sm text-foreground/75">
           {NAV.map((n) => (
@@ -99,11 +95,7 @@ function Header() {
         </button>
       </div>
       {open && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          className="lg:hidden border-t border-border/60 bg-background/95 backdrop-blur-xl"
-        >
+        <div className="lg:hidden border-t border-border/60 bg-background/95 backdrop-blur-xl animate-fade-down">
           <div className="px-6 py-6 flex flex-col gap-4">
             {NAV.map((n) => (
               <a key={n.href} href={n.href} onClick={() => setOpen(false)} className="text-lg">
@@ -112,17 +104,15 @@ function Header() {
             ))}
             <PrimaryButton href="#donate">Donate Today</PrimaryButton>
           </div>
-        </motion.div>
+        </div>
       )}
-    </motion.header>
+    </header>
   );
 }
 
 /* ---------- Reusable ---------- */
 
-function PrimaryButton({
-  href, children, className = "",
-}: { href: string; children: ReactNode; className?: string }) {
+function PrimaryButton({ href, children, className = "" }: { href: string; children: ReactNode; className?: string }) {
   return (
     <a
       href={href}
@@ -134,9 +124,7 @@ function PrimaryButton({
   );
 }
 
-function GhostButton({
-  href, children, className = "",
-}: { href: string; children: ReactNode; className?: string }) {
+function GhostButton({ href, children, className = "" }: { href: string; children: ReactNode; className?: string }) {
   return (
     <a
       href={href}
@@ -157,75 +145,53 @@ function Eyebrow({ children }: { children: ReactNode }) {
   );
 }
 
-function Reveal({
-  children, delay = 0, y = 24,
-}: { children: ReactNode; delay?: number; y?: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+function Reveal({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
+    <div className={`animate-fade-up ${className}`}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
 /* ---------- Hero ---------- */
 
 function Hero() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], [0, 120]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
-
   return (
-    <section id="top" ref={ref} className="relative min-h-[92vh] flex items-center overflow-hidden">
+    <section id="top" className="relative min-h-[92vh] flex items-center overflow-hidden">
       <div className="absolute inset-0 bg-cream-glow" />
       <div className="mx-auto max-w-7xl w-full px-6 lg:px-10 pt-28 pb-20 grid lg:grid-cols-[1.1fr_1fr] gap-14 items-center relative">
         <div>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+          <div className="animate-fade-up">
             <Eyebrow>A 501(c)(3) Nonprofit</Eyebrow>
-          </motion.div>
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-6 text-5xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight"
+          </div>
+          <h1
+            className="mt-6 text-5xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight animate-fade-up"
+            style={{ animationDelay: "0.1s" }}
           >
             Comfort. Care.{" "}
             <span className="text-gradient-honey italic font-light">Hope.</span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.25 }}
-            className="mt-7 max-w-xl text-lg text-foreground/70 leading-relaxed"
+          </h1>
+          <p
+            className="mt-7 max-w-xl text-lg text-foreground/70 leading-relaxed animate-fade-up"
+            style={{ animationDelay: "0.2s" }}
           >
             A cancer diagnosis changes everything — but no one should have to face
             chemotherapy alone. We deliver personalized comfort boxes at no cost,
             offering encouragement, practical support, and hope at every step.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.4 }}
-            className="mt-9 flex flex-wrap items-center gap-4"
+          </p>
+          <div
+            className="mt-9 flex flex-wrap items-center gap-4 animate-fade-up"
+            style={{ animationDelay: "0.3s" }}
           >
             <PrimaryButton href="#request">Request a Comfort Box</PrimaryButton>
             <GhostButton href="#donate">Donate Today</GhostButton>
             <a href="#refer" className="text-sm font-medium text-foreground/70 hover:text-foreground underline underline-offset-4 decoration-primary/50 ml-2">
               Refer a patient
             </a>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.7 }}
-            className="mt-14 flex items-center gap-6 text-sm text-foreground/60"
+          </div>
+          <div
+            className="mt-14 flex items-center gap-6 text-sm text-foreground/60 animate-fade-up"
+            style={{ animationDelay: "0.4s" }}
           >
             <div className="flex -space-x-2">
               {[testimonialMarisol, testimonialDavid, testimonialPriya].map((s, i) => (
@@ -233,32 +199,21 @@ function Hero() {
               ))}
             </div>
             <p><span className="font-semibold text-foreground">2,400+</span> patients supported and counting</p>
-          </motion.div>
+          </div>
         </div>
 
-        <motion.div style={{ y }} className="relative">
-          <motion.div
-            style={{ scale }}
-            className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-glow"
-          >
+        <div className="relative animate-fade-up" style={{ animationDelay: "0.15s" }}>
+          <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-glow">
             <img
               src={heroDiverse}
               alt="A smiling volunteer presenting a comfort box to a patient"
               className="h-full w-full object-cover"
-              width={1920}
-              height={1280}
               fetchPriority="high"
-              decoding="sync"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: -20, y: 20 }}
-            animate={{ opacity: 1, x: 0, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.9 }}
-            className="absolute -left-6 md:-left-10 bottom-10 bg-card/95 backdrop-blur rounded-2xl p-5 shadow-soft border border-border/60 max-w-[240px]"
-          >
+          <div className="absolute -left-6 md:-left-10 bottom-10 bg-card/95 backdrop-blur rounded-2xl p-5 shadow-soft border border-border/60 max-w-[240px]">
             <div className="flex items-center gap-3">
               <div className="h-10 w-10 rounded-full bg-gradient-honey grid place-items-center text-primary-foreground">
                 <Heart size={18} fill="currentColor" />
@@ -268,37 +223,29 @@ function Hero() {
                 <p className="text-lg font-semibold">17 comfort boxes</p>
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 1.1 }}
-            className="absolute -right-4 top-10 bg-card/95 backdrop-blur rounded-2xl p-4 shadow-soft border border-border/60 hidden md:block"
-          >
+          <div className="absolute -right-4 top-10 bg-card/95 backdrop-blur rounded-2xl p-4 shadow-soft border border-border/60 hidden md:block">
             <p className="text-xs italic text-foreground/70 max-w-[180px]">
-              “Therefore encourage one another and build each other up.”
+              "Therefore encourage one another and build each other up."
             </p>
-            <p className="text-[10px] uppercase tracking-widest text-primary mt-2">1 Thess. 5:11</p>
-          </motion.div>
-        </motion.div>
+            <p className="mt-2 text-xs font-medium text-primary">1 Thessalonians 5:11</p>
+          </div>
+        </div>
       </div>
 
-      {/* Marquee */}
-      <div className="absolute bottom-0 left-0 right-0 border-t border-border/40 bg-background/60 backdrop-blur">
-        <div className="overflow-hidden py-4">
-          <div className="flex gap-14 animate-marquee whitespace-nowrap text-xs uppercase tracking-[0.28em] text-foreground/50">
-            {Array.from({ length: 2 }).map((_, r) => (
-              <div key={r} className="flex gap-14 shrink-0">
-                {["Personalized", "No Cost to Patients", "501(c)(3) Nonprofit", "Nationwide Delivery", "Volunteer Powered", "Hospital Partnerships", "Faith-Rooted", "Community Care"].map((w, i) => (
-                  <span key={i} className="flex items-center gap-14">
-                    {w}
-                    <span className="h-1 w-1 rounded-full bg-primary" />
-                  </span>
-                ))}
-              </div>
-            ))}
-          </div>
+      <div className="relative overflow-hidden py-8 border-y border-border/60 bg-background/60 backdrop-blur-sm">
+        <div className="flex gap-14 animate-marquee whitespace-nowrap text-xs uppercase tracking-[0.28em] text-foreground/50">
+          {Array.from({ length: 2 }).map((_, r) => (
+            <div key={r} className="flex gap-14 shrink-0">
+              {["Personalized", "No Cost to Patients", "501(c)(3) Nonprofit", "Nationwide Delivery", "Volunteer Powered", "Hospital Partnerships", "Faith-Rooted", "Community Care"].map((w, i) => (
+                <span key={i} className="flex items-center gap-14">
+                  {w}
+                  <span className="h-1 w-1 rounded-full bg-primary" />
+                </span>
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -318,8 +265,6 @@ function Welcome() {
               src={welcomeChild}
               alt="A volunteer reading to a smiling child of color undergoing chemotherapy"
               loading="lazy"
-              width={1200}
-              height={1408}
               className="relative aspect-[5/6] w-full object-cover rounded-[2rem] shadow-soft"
             />
             <div className="absolute -bottom-6 -right-6 bg-card rounded-2xl px-5 py-4 shadow-soft border border-border/60">
@@ -329,7 +274,7 @@ function Welcome() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.15}>
+        <Reveal>
           <Eyebrow>Welcome</Eyebrow>
           <h2 className="mt-5 text-4xl md:text-5xl lg:text-6xl leading-[1.05]">
             You are <span className="italic text-gradient-honey">not alone</span> in this.
@@ -346,7 +291,7 @@ function Welcome() {
             </p>
             <p>
               Whether you are beginning chemotherapy, caring for a loved one, or looking
-              for a way to make a difference — you’ve found a community built on
+              for a way to make a difference — you've found a community built on
               compassion and hope.
             </p>
           </div>
@@ -362,21 +307,9 @@ function Welcome() {
 /* ---------- How We Help ---------- */
 
 const HELP = [
-  {
-    icon: Gift,
-    title: "Personalized Comfort Boxes",
-    body: "Every comfort box is thoughtfully personalized based on each recipient's preferences and treatment journey — as unique as the person receiving it.",
-  },
-  {
-    icon: Heart,
-    title: "Emotional Support",
-    body: "Sometimes the greatest gift is knowing someone cares. Every box delivers encouragement, hope, and a reminder that no one walks this journey alone.",
-  },
-  {
-    icon: Users,
-    title: "Community of Care",
-    body: "We unite volunteers, donors, caregivers, healthcare professionals, and community partners to support individuals and families through chemotherapy.",
-  },
+  { icon: Gift, title: "Personalized Comfort Boxes", body: "Every comfort box is thoughtfully personalized based on each recipient's preferences and treatment journey — as unique as the person receiving it." },
+  { icon: Heart, title: "Emotional Support", body: "Sometimes the greatest gift is knowing someone cares. Every box delivers encouragement, hope, and a reminder that no one walks this journey alone." },
+  { icon: Users, title: "Community of Care", body: "We unite volunteers, donors, caregivers, healthcare professionals, and community partners to support individuals and families through chemotherapy." },
 ];
 
 function HowWeHelp() {
@@ -394,8 +327,8 @@ function HowWeHelp() {
         </Reveal>
 
         <div className="mt-16 grid md:grid-cols-3 gap-6 lg:gap-8">
-          {HELP.map((h, i) => (
-            <Reveal key={h.title} delay={i * 0.1}>
+          {HELP.map((h) => (
+            <Reveal key={h.title}>
               <div className="group relative h-full rounded-3xl bg-card border border-border/60 p-8 lg:p-10 transition-all duration-500 hover:-translate-y-1 hover:shadow-glow overflow-hidden">
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-primary/5 via-transparent to-transparent" />
                 <div className="relative">
@@ -419,33 +352,12 @@ function HowWeHelp() {
 
 /* ---------- Impact ---------- */
 
-function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true });
-  const [val, setVal] = useState(0);
-  useEffect(() => {
-    if (!inView) return;
-    const controls = animate(0, to, {
-      duration: 2.4,
-      ease: [0.22, 1, 0.36, 1],
-      onUpdate: (v) => setVal(Math.floor(v)),
-    });
-    return () => controls.stop();
-  }, [inView, to]);
-  return (
-    <span ref={ref}>
-      {val.toLocaleString()}
-      {suffix}
-    </span>
-  );
-}
-
 const STATS = [
-  { label: "Comfort Boxes Delivered", value: 2400, suffix: "+" },
-  { label: "Patients Served", value: 1800, suffix: "+" },
-  { label: "Volunteers Engaged", value: 320, suffix: "" },
-  { label: "Hospital Partners", value: 42, suffix: "" },
-  { label: "States Served", value: 27, suffix: "" },
+  { label: "Comfort Boxes Delivered", value: "2,400+" },
+  { label: "Patients Served", value: "1,800+" },
+  { label: "Volunteers Engaged", value: "320" },
+  { label: "Hospital Partners", value: "42" },
+  { label: "States Served", value: "27" },
 ];
 
 function Impact() {
@@ -461,7 +373,7 @@ function Impact() {
               <span className="italic text-gradient-honey">every day</span>.
             </h2>
           </Reveal>
-          <Reveal delay={0.15}>
+          <Reveal>
             <p className="text-lg text-foreground/70 leading-relaxed">
               Every comfort box represents more than a package. It represents compassion,
               encouragement, and a community committed to supporting patients throughout
@@ -471,12 +383,10 @@ function Impact() {
         </div>
 
         <div className="mt-16 grid grid-cols-2 md:grid-cols-5 gap-px bg-border/60 rounded-3xl overflow-hidden border border-border/60">
-          {STATS.map((s, i) => (
-            <Reveal key={s.label} delay={i * 0.06}>
+          {STATS.map((s) => (
+            <Reveal key={s.label}>
               <div className="h-full bg-card p-8 lg:p-10 hover:bg-secondary/50 transition-colors">
-                <p className="text-4xl md:text-5xl font-display text-gradient-honey">
-                  <Counter to={s.value} suffix={s.suffix} />
-                </p>
+                <p className="text-4xl md:text-5xl font-display text-gradient-honey">{s.value}</p>
                 <p className="mt-3 text-sm text-foreground/70 leading-snug">{s.label}</p>
               </div>
             </Reveal>
@@ -495,7 +405,7 @@ const CATEGORIES = [
   { icon: Coffee, label: "Hydration", body: "Herbal teas, insulated bottles, and hydration boosters.", img: boxHydration },
   { icon: Leaf, label: "Relaxation", body: "Aromatherapy, sleep masks, and calming rituals for rest.", img: boxRelaxation },
   { icon: BookOpen, label: "Entertainment", body: "Journals, puzzles, and reading picks for quiet infusion hours.", img: boxEntertainment },
-  { icon: MessageCircle, label: "Inspirational Notes", body: "Handwritten cards from volunteers who’ve walked this road.", img: boxNotes },
+  { icon: MessageCircle, label: "Inspirational Notes", body: "Handwritten cards from volunteers who've walked this road.", img: boxNotes },
   { icon: HandHeart, label: "Helpful Resources", body: "Guides, checklists, and support-network navigation.", img: boxResources },
 ];
 
@@ -512,7 +422,7 @@ function InsideBox() {
               <span className="italic text-gradient-honey">Personally curated.</span>
             </h2>
             <p className="mt-6 text-lg text-foreground/70 leading-relaxed">
-              Every Comfort With Chemotherapy box is personalized to the patient’s needs,
+              Every Comfort With Chemotherapy box is personalized to the patient's needs,
               preferences, and treatment journey — while always offering comfort,
               encouragement, and practical support.
             </p>
@@ -523,17 +433,12 @@ function InsideBox() {
           <Reveal>
             <div className="relative">
               <div className="absolute -inset-8 bg-gradient-honey opacity-15 blur-3xl rounded-full" />
-              <motion.img
+              <img
                 key={active}
-                initial={{ opacity: 0.7, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6 }}
                 src={CATEGORIES[active].img}
                 alt="A curated comfort box"
                 loading="lazy"
-                width={1408}
-                height={1408}
-                className="relative w-full aspect-square object-cover rounded-[2rem] shadow-soft"
+                className="relative w-full aspect-square object-cover rounded-[2rem] shadow-soft transition-opacity duration-500"
               />
             </div>
           </Reveal>
@@ -542,39 +447,34 @@ function InsideBox() {
             {CATEGORIES.map((c, i) => {
               const on = i === active;
               return (
-                <Reveal key={c.label} delay={i * 0.04}>
-                  <button
-                    onMouseEnter={() => setActive(i)}
-                    onFocus={() => setActive(i)}
-                    onClick={() => setActive(i)}
-                    className={`group w-full text-left rounded-2xl border transition-all duration-500 overflow-hidden ${
-                      on
-                        ? "border-primary/40 bg-card shadow-soft"
-                        : "border-border/60 bg-card/50 hover:bg-card"
-                    }`}
-                  >
-                    <div className="flex items-center gap-5 p-5 lg:p-6">
-                      <div className={`h-12 w-12 shrink-0 grid place-items-center rounded-xl transition-all ${
-                        on ? "bg-gradient-honey text-primary-foreground shadow-soft" : "bg-secondary text-primary"
-                      }`}>
-                        <c.icon size={20} />
+                <button
+                  key={c.label}
+                  onMouseEnter={() => setActive(i)}
+                  onFocus={() => setActive(i)}
+                  onClick={() => setActive(i)}
+                  className={`group w-full text-left rounded-2xl border transition-all duration-500 overflow-hidden ${
+                    on
+                      ? "border-primary/40 bg-card shadow-soft"
+                      : "border-border/60 bg-card/50 hover:bg-card"
+                  }`}
+                >
+                  <div className="flex items-center gap-5 p-5 lg:p-6">
+                    <div className={`h-12 w-12 shrink-0 grid place-items-center rounded-xl transition-all ${
+                      on ? "bg-gradient-honey text-primary-foreground shadow-soft" : "bg-secondary text-primary"
+                    }`}>
+                      <c.icon size={20} />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-baseline justify-between gap-4">
+                        <h3 className="text-xl font-display">{c.label}</h3>
+                        <span className="text-xs text-foreground/40 tabular-nums">0{i + 1}</span>
                       </div>
-                      <div className="flex-1">
-                        <div className="flex items-baseline justify-between gap-4">
-                          <h3 className="text-xl font-display">{c.label}</h3>
-                          <span className="text-xs text-foreground/40 tabular-nums">0{i + 1}</span>
-                        </div>
-                        <motion.p
-                          initial={false}
-                          animate={{ height: on ? "auto" : 0, opacity: on ? 1 : 0, marginTop: on ? 8 : 0 }}
-                          className="text-sm text-foreground/70 leading-relaxed overflow-hidden"
-                        >
-                          {c.body}
-                        </motion.p>
+                      <div className={`text-sm text-foreground/70 leading-relaxed overflow-hidden transition-all duration-500 ${on ? "max-h-24 opacity-100 mt-2" : "max-h-0 opacity-0"}`}>
+                        {c.body}
                       </div>
                     </div>
-                  </button>
-                </Reveal>
+                  </div>
+                </button>
               );
             })}
             <div className="pt-6">
@@ -590,27 +490,9 @@ function InsideBox() {
 /* ---------- Stories ---------- */
 
 const STORIES = [
-  {
-    quote:
-      "The comfort box arrived on my hardest day. Opening it, I felt like a whole community was sitting beside me. I wasn't alone anymore.",
-    name: "Marisol A.",
-    role: "Patient · Stage III",
-    img: testimonialMarisol,
-  },
-  {
-    quote:
-      "My son lit up when he opened his box. Something so simple gave him joy in the middle of everything hard. I'll never forget it.",
-    name: "David J.",
-    role: "Parent & Caregiver",
-    img: testimonialDavid,
-  },
-  {
-    quote:
-      "Volunteering with CWC changed my life as much as it changed anyone’s. Every note, every box, every delivery matters.",
-    name: "Priya K.",
-    role: "Lead Volunteer",
-    img: testimonialPriya,
-  },
+  { quote: "The comfort box arrived on my hardest day. Opening it, I felt like a whole community was sitting beside me. I wasn't alone anymore.", name: "Marisol A.", role: "Patient · Stage III", img: testimonialMarisol },
+  { quote: "My son lit up when he opened his box. Something so simple gave him joy in the middle of everything hard. I'll never forget it.", name: "David J.", role: "Parent & Caregiver", img: testimonialDavid },
+  { quote: "Volunteering with CWC changed my life as much as it changed anyone's. Every note, every box, every delivery matters.", name: "Priya K.", role: "Lead Volunteer", img: testimonialPriya },
 ];
 
 function Stories() {
@@ -635,49 +517,35 @@ function Stories() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.1}>
-          <div className="mt-14 grid lg:grid-cols-[1fr_1.2fr] gap-10 lg:gap-16 items-center">
-            <motion.div
-              key={s.img}
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7 }}
-              className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-soft"
-            >
-              <img src={s.img} alt="" loading="lazy" className="h-full w-full object-cover" />
-            </motion.div>
+        <div className="mt-14 grid lg:grid-cols-[1fr_1.2fr] gap-10 lg:gap-16 items-center">
+          <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-soft">
+            <img key={s.img} src={s.img} alt="" loading="lazy" className="h-full w-full object-cover transition-opacity duration-700" />
+          </div>
 
-            <div>
-              <motion.blockquote
-                key={s.quote}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7 }}
-                className="text-2xl md:text-3xl lg:text-4xl font-display leading-[1.25] text-foreground/90"
-              >
-                <span className="text-primary text-5xl leading-none align-top mr-1">“</span>
-                {s.quote}
-              </motion.blockquote>
-              <div className="mt-8">
-                <p className="text-lg">{s.name}</p>
-                <p className="text-sm text-foreground/60">{s.role}</p>
-              </div>
-              <div className="mt-10 flex items-center gap-3">
-                {STORIES.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setIdx(i)}
-                    aria-label={`Story ${i + 1}`}
-                    className={`h-1.5 rounded-full transition-all ${i === idx ? "w-10 bg-primary" : "w-4 bg-foreground/20 hover:bg-foreground/40"}`}
-                  />
-                ))}
-                <a href="#stories" className="ml-6 text-sm font-medium underline underline-offset-4 decoration-primary/50 hover:text-primary transition">
-                  Read more stories
-                </a>
-              </div>
+          <div>
+            <blockquote className="text-2xl md:text-3xl lg:text-4xl font-display leading-[1.25] text-foreground/90">
+              <span className="text-primary text-5xl leading-none align-top mr-1">"</span>
+              {s.quote}
+            </blockquote>
+            <div className="mt-8">
+              <p className="text-lg">{s.name}</p>
+              <p className="text-sm text-foreground/60">{s.role}</p>
+            </div>
+            <div className="mt-10 flex items-center gap-3">
+              {STORIES.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setIdx(i)}
+                  aria-label={`Story ${i + 1}`}
+                  className={`h-1.5 rounded-full transition-all ${i === idx ? "w-10 bg-primary" : "w-4 bg-foreground/20 hover:bg-foreground/40"}`}
+                />
+              ))}
+              <a href="#stories" className="ml-6 text-sm font-medium underline underline-offset-4 decoration-primary/50 hover:text-primary transition">
+                Read more stories
+              </a>
             </div>
           </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   );
@@ -706,12 +574,12 @@ function WaysToHelp() {
           </div>
         </Reveal>
         <div className="mt-16 grid md:grid-cols-2 gap-6 lg:gap-8">
-          {WAYS.map((w, i) => (
-            <Reveal key={w.id} delay={i * 0.08}>
+          {WAYS.map((w) => (
+            <Reveal key={w.id}>
               <div id={w.id} className="group relative rounded-3xl p-8 lg:p-10 bg-card border border-border/60 overflow-hidden hover:shadow-glow transition-all duration-500">
                 <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-gradient-honey opacity-0 group-hover:opacity-20 blur-3xl transition-opacity duration-700" />
                 <div className="relative flex flex-col h-full">
-                  <p className="text-xs uppercase tracking-widest text-primary font-medium">0{i + 1}</p>
+                  <p className="text-xs uppercase tracking-widest text-primary font-medium">0{WAYS.indexOf(w) + 1}</p>
                   <h3 className="mt-3 text-3xl lg:text-4xl">{w.title}</h3>
                   <p className="mt-4 text-foreground/70 leading-relaxed max-w-md">{w.body}</p>
                   <div className="mt-8">
@@ -735,24 +603,21 @@ function Founder() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-[1fr_1.2fr] gap-16 lg:gap-24 items-center">
         <Reveal>
           <div className="relative aspect-[4/5] w-full rounded-[2rem] bg-gradient-honey p-8 lg:p-12 shadow-soft flex flex-col justify-between overflow-hidden group">
-            {/* Decorative background glows */}
             <div className="absolute -right-16 -bottom-16 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
             <div className="absolute -left-16 -top-16 h-64 w-64 rounded-full bg-black/5 blur-3xl" />
-            
             <div className="relative z-10">
-              <span className="text-white/30 text-8xl font-display leading-none select-none">“</span>
+              <span className="text-white/30 text-8xl font-display leading-none select-none">"</span>
               <p className="text-xl md:text-2xl font-display text-primary-foreground/90 leading-relaxed italic -mt-6">
                 When I was going through chemotherapy, a simple box of comfort items reminded me that I wasn't fighting alone. That spark of hope is what we want to deliver to every patient in America.
               </p>
             </div>
-            
             <div className="relative z-10 border-t border-primary-foreground/10 pt-6">
               <p className="text-xs uppercase tracking-widest text-primary-foreground/60 font-semibold">Our Mission</p>
               <p className="text-lg font-display text-primary-foreground mt-1">Comfort. Care. Hope.</p>
             </div>
           </div>
         </Reveal>
-        <Reveal delay={0.15}>
+        <Reveal>
           <Eyebrow>Meet Our Founder</Eyebrow>
           <h2 className="mt-5 text-4xl md:text-5xl lg:text-6xl leading-[1.05]">
             A mission inspired by{" "}
@@ -801,12 +666,9 @@ function Newsletter() {
             ways to bring comfort and hope to individuals and families facing chemotherapy.
           </p>
         </Reveal>
-        <Reveal delay={0.15}>
+        <Reveal>
           <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              setSent(true);
-            }}
+            onSubmit={(e) => { e.preventDefault(); setSent(true); }}
             className="mt-10 grid sm:grid-cols-[1fr_1fr_1.4fr_auto] gap-3 max-w-3xl mx-auto"
           >
             <input required placeholder="First name" className="rounded-full px-5 py-3.5 bg-card border border-border/60 focus:border-primary focus:outline-none transition text-sm" />
