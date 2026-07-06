@@ -1,24 +1,24 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { motion, useInView, useScroll, useTransform, animate } from "framer-motion";
 import {
-  Heart, HandHeart, Users, Sparkles, ArrowRight, ArrowUpRight,
-  Gift, Leaf, MessageCircle, Coffee, BookOpen, Send, Menu, X,
+  Heart, HandHeart, Sparkles, ArrowUpRight,
+  Leaf, MessageCircle, Coffee, BookOpen, Send, Menu, X,
   Phone, Mail, Facebook, Instagram, Linkedin, Twitter,
 } from "lucide-react";
 import logo from "@/assets/logo.png";
-import heroDiverse from "@/assets/hero_diverse.png";
-import welcomeChild from "@/assets/welcome_child.png";
-import ctaDiverse from "@/assets/cta_diverse.png";
-import testimonialMarisol from "@/assets/testimonial_marisol.png";
-import testimonialDavid from "@/assets/testimonial_david.png";
-import testimonialPriya from "@/assets/testimonial_priya.png";
-import boxComfort from "@/assets/box_comfort.png";
-import boxSelfCare from "@/assets/box_selfcare.png";
-import boxHydration from "@/assets/box_hydration.png";
-import boxRelaxation from "@/assets/box_relaxation.png";
-import boxEntertainment from "@/assets/box_entertainment.png";
-import boxNotes from "@/assets/box_notes.png";
-import boxResources from "@/assets/box_resources.png";
+import heroDiverse from "@/assets/hero_diverse.jpg";
+import welcomeChild from "@/assets/welcome_child.jpg";
+import ctaDiverse from "@/assets/cta_diverse.jpg";
+import testimonialMarisol from "@/assets/testimonial_marisol.jpg";
+import testimonialDavid from "@/assets/testimonial_david.jpg";
+import testimonialPriya from "@/assets/testimonial_priya.jpg";
+import boxComfort from "@/assets/box_comfort.jpg";
+import boxSelfCare from "@/assets/box_selfcare.jpg";
+import boxHydration from "@/assets/box_hydration.jpg";
+import boxRelaxation from "@/assets/box_relaxation.jpg";
+import boxEntertainment from "@/assets/box_entertainment.jpg";
+import boxNotes from "@/assets/box_notes.jpg";
+import boxResources from "@/assets/box_resources.jpg";
 
 export default function App() {
   return (
@@ -812,8 +812,8 @@ function Newsletter() {
             <input required placeholder="First name" className="rounded-full px-5 py-3.5 bg-card border border-border/60 focus:border-primary focus:outline-none transition text-sm" />
             <input required placeholder="Last name" className="rounded-full px-5 py-3.5 bg-card border border-border/60 focus:border-primary focus:outline-none transition text-sm" />
             <input required type="email" placeholder="Email address" className="rounded-full px-5 py-3.5 bg-card border border-border/60 focus:border-primary focus:outline-none transition text-sm" />
-            <button className="rounded-full px-6 py-3.5 text-sm font-medium bg-gradient-honey text-primary-foreground shadow-soft hover:shadow-glow hover:-translate-y-0.5 transition-all inline-flex items-center gap-2 justify-center">
-              <Send size={15} /> {sent ? "Subscribed" : "Subscribe"}
+            <button type="submit" className="rounded-full px-6 py-3.5 text-sm font-medium bg-gradient-honey text-primary-foreground shadow-soft hover:shadow-glow hover:-translate-y-0.5 transition-all inline-flex items-center gap-2 justify-center">
+              <Send size={15} /> {sent ? "Subscribed!" : "Subscribe"}
             </button>
           </form>
         </Reveal>
@@ -863,7 +863,7 @@ function Footer() {
   return (
     <footer id="contact" className="bg-[oklch(0.18_0.02_60)] text-white/80 pt-20 pb-10">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="grid lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.6fr] gap-10 lg:gap-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.6fr] gap-10 lg:gap-12">
           <div>
             <img src={logo} alt="Comfort With Chemotherapy" className="h-12 w-auto brightness-125" />
             <p className="mt-6 text-sm leading-relaxed text-white/60 max-w-sm">
