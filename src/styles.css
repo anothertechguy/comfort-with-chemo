@@ -7,6 +7,7 @@
 /*
  * Comfort With Chemotherapy — Design System
  * Warm cream + honeyed yellow. Editorial serif display, humanist sans body.
+ * Colors use HSL for maximum browser compatibility (no oklch).
  */
 
 @theme inline {
@@ -61,84 +62,84 @@
 
 :root {
   --radius: 0.9rem;
-  --cream: oklch(0.985 0.012 85);
-  --ink: oklch(0.22 0.025 60);
-  --honey: oklch(0.82 0.155 82);
-  --honey-deep: oklch(0.7 0.17 72);
-  --honey-soft: oklch(0.95 0.05 88);
+  --cream: hsl(42, 60%, 97%);
+  --ink: hsl(36, 18%, 18%);
+  --honey: hsl(40, 82%, 60%);
+  --honey-deep: hsl(38, 72%, 48%);
+  --honey-soft: hsl(42, 60%, 94%);
 
   --background: var(--cream);
   --foreground: var(--ink);
-  --card: oklch(1 0 0);
+  --card: hsl(0, 0%, 100%);
   --card-foreground: var(--ink);
-  --popover: oklch(1 0 0);
+  --popover: hsl(0, 0%, 100%);
   --popover-foreground: var(--ink);
   --primary: var(--honey-deep);
-  --primary-foreground: oklch(0.15 0.02 60);
+  --primary-foreground: hsl(36, 20%, 12%);
   --secondary: var(--honey-soft);
   --secondary-foreground: var(--ink);
-  --muted: oklch(0.955 0.012 80);
-  --muted-foreground: oklch(0.48 0.03 60);
+  --muted: hsl(40, 30%, 94%);
+  --muted-foreground: hsl(36, 10%, 40%);
   --accent: var(--honey);
-  --accent-foreground: oklch(0.18 0.02 60);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.9 0.02 80);
-  --input: oklch(0.9 0.02 80);
+  --accent-foreground: hsl(36, 18%, 15%);
+  --destructive: hsl(16, 75%, 48%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --border: hsl(40, 25%, 88%);
+  --input: hsl(40, 25%, 88%);
   --ring: var(--honey-deep);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  --chart-1: hsl(26, 80%, 52%);
+  --chart-2: hsl(180, 45%, 48%);
+  --chart-3: hsl(220, 30%, 36%);
+  --chart-4: hsl(40, 75%, 62%);
+  --chart-5: hsl(34, 72%, 58%);
   --sidebar: var(--cream);
   --sidebar-foreground: var(--ink);
   --sidebar-primary: var(--honey-deep);
-  --sidebar-primary-foreground: oklch(0.15 0.02 60);
+  --sidebar-primary-foreground: hsl(36, 20%, 12%);
   --sidebar-accent: var(--honey-soft);
   --sidebar-accent-foreground: var(--ink);
-  --sidebar-border: oklch(0.9 0.02 80);
+  --sidebar-border: hsl(40, 25%, 88%);
   --sidebar-ring: var(--honey-deep);
 
-  --gradient-honey: linear-gradient(135deg, oklch(0.88 0.16 88) 0%, oklch(0.78 0.18 72) 55%, oklch(0.68 0.17 55) 100%);
-  --gradient-cream: radial-gradient(1200px 600px at 20% 0%, oklch(0.97 0.06 88 / 0.7), transparent 60%), radial-gradient(900px 500px at 90% 20%, oklch(0.95 0.08 78 / 0.55), transparent 60%);
-  --shadow-soft: 0 2px 8px -2px oklch(0.5 0.1 70 / 0.08), 0 20px 40px -20px oklch(0.5 0.1 70 / 0.18);
-  --shadow-glow: 0 30px 80px -30px oklch(0.7 0.18 72 / 0.55);
+  --gradient-honey: linear-gradient(135deg, hsl(42, 75%, 68%) 0%, hsl(38, 78%, 54%) 55%, hsl(34, 72%, 44%) 100%);
+  --gradient-cream: radial-gradient(1200px 600px at 20% 0%, hsla(42, 72%, 80%, 0.7), transparent 60%), radial-gradient(900px 500px at 90% 20%, hsla(38, 65%, 76%, 0.55), transparent 60%);
+  --shadow-soft: 0 2px 8px -2px hsla(36, 40%, 40%, 0.08), 0 20px 40px -20px hsla(36, 40%, 40%, 0.18);
+  --shadow-glow: 0 30px 80px -30px hsla(38, 55%, 50%, 0.55);
 }
 
 .dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  --background: hsl(230, 20%, 12%);
+  --foreground: hsl(210, 10%, 97%);
+  --card: hsl(230, 18%, 18%);
+  --card-foreground: hsl(210, 10%, 97%);
+  --popover: hsl(230, 18%, 18%);
+  --popover-foreground: hsl(210, 10%, 97%);
+  --primary: hsl(210, 12%, 88%);
+  --primary-foreground: hsl(230, 18%, 18%);
+  --secondary: hsl(230, 14%, 24%);
+  --secondary-foreground: hsl(210, 10%, 97%);
+  --muted: hsl(230, 14%, 24%);
+  --muted-foreground: hsl(218, 8%, 62%);
+  --accent: hsl(230, 14%, 24%);
+  --accent-foreground: hsl(210, 10%, 97%);
+  --destructive: hsl(18, 70%, 58%);
+  --destructive-foreground: hsl(210, 10%, 97%);
+  --border: hsla(0, 0%, 100%, 0.1);
+  --input: hsla(0, 0%, 100%, 0.15);
+  --ring: hsl(220, 8%, 50%);
+  --chart-1: hsl(234, 75%, 62%);
+  --chart-2: hsl(155, 50%, 54%);
+  --chart-3: hsl(34, 72%, 58%);
+  --chart-4: hsl(290, 60%, 56%);
+  --chart-5: hsl(10, 72%, 56%);
+  --sidebar: hsl(230, 18%, 18%);
+  --sidebar-foreground: hsl(210, 10%, 97%);
+  --sidebar-primary: hsl(234, 75%, 62%);
+  --sidebar-primary-foreground: hsl(210, 10%, 97%);
+  --sidebar-accent: hsl(230, 14%, 24%);
+  --sidebar-accent-foreground: hsl(210, 10%, 97%);
+  --sidebar-border: hsla(0, 0%, 100%, 0.1);
+  --sidebar-ring: hsl(220, 8%, 50%);
 }
 
 @layer base {

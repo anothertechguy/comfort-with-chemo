@@ -68,7 +68,7 @@ function Header() {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className={`sticky top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "backdrop-blur-xl bg-background/80 border-b border-border/60 shadow-[0_4px_20px_-8px_oklch(0.7_0.15_75/0.15)]"
+          ? "backdrop-blur-xl bg-background/80 border-b border-border/60 shadow-[0_4px_20px_-8px_hsla(38,40%,40%,0.15)]"
           : "bg-transparent"
       }`}
     >
@@ -861,7 +861,7 @@ function FinalCTA() {
 function Footer() {
   const [footerSent, setFooterSent] = useState(false);
   return (
-    <footer id="contact" className="bg-[oklch(0.18_0.02_60)] text-white/80 pt-20 pb-10">
+    <footer id="contact" className="bg-[hsl(36,16%,14%)] text-white/80 pt-20 pb-10">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.6fr] gap-10 lg:gap-12">
           <div>
