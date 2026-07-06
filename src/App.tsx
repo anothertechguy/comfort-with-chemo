@@ -6,12 +6,19 @@ import {
   Phone, Mail, Facebook, Instagram, Linkedin, Twitter,
 } from "lucide-react";
 import logo from "@/assets/logo.png";
-import hero from "@/assets/hero.jpg";
-import welcome from "@/assets/welcome.jpg";
-import box from "@/assets/box.jpg";
-import story from "@/assets/story.jpg";
-import founder from "@/assets/founder.jpg";
-import ctaImg from "@/assets/cta.jpg";
+import heroDiverse from "@/assets/hero_diverse.png";
+import welcomeChild from "@/assets/welcome_child.png";
+import ctaDiverse from "@/assets/cta_diverse.png";
+import testimonialMarisol from "@/assets/testimonial_marisol.png";
+import testimonialDavid from "@/assets/testimonial_david.png";
+import testimonialPriya from "@/assets/testimonial_priya.png";
+import boxComfort from "@/assets/box_comfort.png";
+import boxSelfCare from "@/assets/box_selfcare.png";
+import boxHydration from "@/assets/box_hydration.png";
+import boxRelaxation from "@/assets/box_relaxation.png";
+import boxEntertainment from "@/assets/box_entertainment.png";
+import boxNotes from "@/assets/box_notes.png";
+import boxResources from "@/assets/box_resources.png";
 
 export default function App() {
   return (
@@ -221,7 +228,7 @@ function Hero() {
             className="mt-14 flex items-center gap-6 text-sm text-foreground/60"
           >
             <div className="flex -space-x-2">
-              {[hero, welcome, story].map((s, i) => (
+              {[testimonialMarisol, testimonialDavid, testimonialPriya].map((s, i) => (
                 <img key={i} src={s} alt="" className="h-9 w-9 rounded-full object-cover ring-2 ring-background" />
               ))}
             </div>
@@ -235,8 +242,8 @@ function Hero() {
             className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-glow"
           >
             <img
-              src={hero}
-              alt="A volunteer holding the hand of a patient in chemotherapy"
+              src={heroDiverse}
+              alt="A smiling volunteer presenting a comfort box to a patient"
               className="h-full w-full object-cover"
               width={1920}
               height={1280}
@@ -308,8 +315,8 @@ function Welcome() {
           <div className="relative">
             <div className="absolute -inset-6 rounded-[2.5rem] bg-gradient-honey opacity-20 blur-2xl" />
             <img
-              src={welcome}
-              alt="A volunteer embracing a young patient"
+              src={welcomeChild}
+              alt="A volunteer reading to a smiling child of color undergoing chemotherapy"
               loading="lazy"
               width={1200}
               height={1408}
@@ -483,13 +490,13 @@ function Impact() {
 /* ---------- Inside the Box ---------- */
 
 const CATEGORIES = [
-  { icon: Heart, label: "Comfort Items", body: "Cozy blankets, soft socks, and plush textures for treatment days." },
-  { icon: Sparkles, label: "Self Care", body: "Gentle lotions, lip balms, and skin-safe essentials curated for chemo." },
-  { icon: Coffee, label: "Hydration", body: "Herbal teas, insulated bottles, and hydration boosters." },
-  { icon: Leaf, label: "Relaxation", body: "Aromatherapy, sleep masks, and calming rituals for rest." },
-  { icon: BookOpen, label: "Entertainment", body: "Journals, puzzles, and reading picks for quiet infusion hours." },
-  { icon: MessageCircle, label: "Inspirational Notes", body: "Handwritten cards from volunteers who’ve walked this road." },
-  { icon: HandHeart, label: "Helpful Resources", body: "Guides, checklists, and support-network navigation." },
+  { icon: Heart, label: "Comfort Items", body: "Cozy blankets, soft socks, and plush textures for treatment days.", img: boxComfort },
+  { icon: Sparkles, label: "Self Care", body: "Gentle lotions, lip balms, and skin-safe essentials curated for chemo.", img: boxSelfCare },
+  { icon: Coffee, label: "Hydration", body: "Herbal teas, insulated bottles, and hydration boosters.", img: boxHydration },
+  { icon: Leaf, label: "Relaxation", body: "Aromatherapy, sleep masks, and calming rituals for rest.", img: boxRelaxation },
+  { icon: BookOpen, label: "Entertainment", body: "Journals, puzzles, and reading picks for quiet infusion hours.", img: boxEntertainment },
+  { icon: MessageCircle, label: "Inspirational Notes", body: "Handwritten cards from volunteers who’ve walked this road.", img: boxNotes },
+  { icon: HandHeart, label: "Helpful Resources", body: "Guides, checklists, and support-network navigation.", img: boxResources },
 ];
 
 function InsideBox() {
@@ -521,7 +528,7 @@ function InsideBox() {
                 initial={{ opacity: 0.7, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6 }}
-                src={box}
+                src={CATEGORIES[active].img}
                 alt="A curated comfort box"
                 loading="lazy"
                 width={1408}
@@ -588,21 +595,21 @@ const STORIES = [
       "The comfort box arrived on my hardest day. Opening it, I felt like a whole community was sitting beside me. I wasn't alone anymore.",
     name: "Marisol A.",
     role: "Patient · Stage III",
-    img: hero,
+    img: testimonialMarisol,
   },
   {
     quote:
       "My son lit up when he opened his box. Something so simple gave him joy in the middle of everything hard. I'll never forget it.",
     name: "David J.",
     role: "Parent & Caregiver",
-    img: story,
+    img: testimonialDavid,
   },
   {
     quote:
       "Volunteering with CWC changed my life as much as it changed anyone’s. Every note, every box, every delivery matters.",
     name: "Priya K.",
     role: "Lead Volunteer",
-    img: welcome,
+    img: testimonialPriya,
   },
 ];
 
@@ -820,7 +827,7 @@ function Newsletter() {
 function FinalCTA() {
   return (
     <section className="relative py-32 lg:py-44 overflow-hidden">
-      <img src={ctaImg} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+      <img src={ctaDiverse} alt="A diverse group of cancer survivors celebrating" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
