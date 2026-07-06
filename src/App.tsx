@@ -159,7 +159,7 @@ function Hero() {
   return (
     <section id="top" className="relative min-h-[92vh] flex flex-col justify-center overflow-hidden">
       <div className="absolute inset-0 bg-cream-glow" />
-      <div className="mx-auto max-w-7xl w-full px-6 lg:px-10 pt-28 pb-20 grid lg:grid-cols-[1.1fr_1fr] gap-14 items-center relative">
+      <div className="mx-auto max-w-7xl w-full px-6 lg:px-10 pt-16 md:pt-24 lg:pt-32 pb-12 md:pb-16 lg:pb-24 grid lg:grid-cols-[1.1fr_1fr] gap-14 items-center relative">
         <div>
           <div className="animate-fade-up">
             <Eyebrow>A 501(c)(3) Nonprofit</Eyebrow>
@@ -256,7 +256,7 @@ function Hero() {
 
 function Welcome() {
   return (
-    <section id="welcome" className="py-28 lg:py-36">
+    <section id="welcome" className="py-16 md:py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
         <Reveal>
           <div className="relative">
@@ -314,7 +314,7 @@ const HELP = [
 
 function HowWeHelp() {
   return (
-    <section id="help" className="py-28 lg:py-36 bg-secondary/50 relative">
+    <section id="help" className="py-16 md:py-20 lg:py-28 bg-secondary/50 relative">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal>
           <div className="max-w-2xl">
@@ -362,7 +362,7 @@ const STATS = [
 
 function Impact() {
   return (
-    <section id="impact" className="py-28 lg:py-36 relative overflow-hidden">
+    <section id="impact" className="py-16 md:py-20 lg:py-28 relative overflow-hidden">
       <div className="absolute inset-0 bg-cream-glow" />
       <div className="mx-auto max-w-7xl px-6 lg:px-10 relative">
         <div className="grid lg:grid-cols-[1fr_1.2fr] gap-14 items-end">
@@ -412,7 +412,7 @@ const CATEGORIES = [
 function InsideBox() {
   const [active, setActive] = useState(0);
   return (
-    <section id="box" className="py-28 lg:py-36 bg-secondary/50">
+    <section id="box" className="py-16 md:py-20 lg:py-28 bg-secondary/50">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal>
           <div className="max-w-2xl">
@@ -503,7 +503,7 @@ function Stories() {
   }, []);
   const s = STORIES[idx];
   return (
-    <section id="stories" className="py-28 lg:py-36">
+    <section id="stories" className="py-16 md:py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal>
           <div className="flex flex-wrap items-end justify-between gap-6 max-w-4xl">
@@ -562,7 +562,7 @@ const WAYS = [
 
 function WaysToHelp() {
   return (
-    <section id="get-involved" className="py-28 lg:py-36 bg-secondary/50">
+    <section id="get-involved" className="py-16 md:py-20 lg:py-28 bg-secondary/50">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal>
           <div className="max-w-2xl">
@@ -599,7 +599,7 @@ function WaysToHelp() {
 
 function Founder() {
   return (
-    <section id="founder" className="py-28 lg:py-36">
+    <section id="founder" className="py-16 md:py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-[1fr_1.2fr] gap-16 lg:gap-24 items-center">
         <Reveal>
           <div className="relative aspect-[4/5] w-full rounded-[2rem] bg-gradient-honey p-8 lg:p-12 shadow-soft flex flex-col justify-between overflow-hidden group">
@@ -653,7 +653,7 @@ function Founder() {
 function Newsletter() {
   const [sent, setSent] = useState(false);
   return (
-    <section id="subscribe" className="py-24 lg:py-32">
+    <section id="subscribe" className="py-12 md:py-16 lg:py-24">
       <div className="mx-auto max-w-4xl px-6 lg:px-10 text-center">
         <Reveal>
           <Eyebrow>Stay Connected</Eyebrow>
