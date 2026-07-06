@@ -846,10 +846,11 @@ function FinalCTA() {
 /* ---------- Footer ---------- */
 
 function Footer() {
+  const [footerSent, setFooterSent] = useState(false);
   return (
     <footer id="contact" className="bg-[oklch(0.18_0.02_60)] text-white/80 pt-20 pb-10">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="grid lg:grid-cols-[1.4fr_1fr_1fr_1fr] gap-12 lg:gap-16">
+        <div className="grid lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.6fr] gap-10 lg:gap-12">
           <div>
             <img src={logo} alt="Comfort With Chemotherapy" className="h-12 w-auto brightness-125" />
             <p className="mt-6 text-sm leading-relaxed text-white/60 max-w-sm">
@@ -870,6 +871,24 @@ function Footer() {
           <FooterCol title="Connect" links={[
             ["Newsletter", "#subscribe"], ["Contact", "#contact"], ["Privacy Policy", "#"], ["Terms of Use", "#"],
           ]} />
+          <div>
+            <p className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Stay Connected</p>
+            <p className="mt-4 text-sm text-white/60 leading-relaxed">
+              Inspiring stories, volunteer opportunities, and ways to help — straight to your inbox.
+            </p>
+            {footerSent ? (
+              <p className="mt-5 text-sm text-primary font-medium">Thanks for subscribing! 🌟</p>
+            ) : (
+              <form onSubmit={(e) => { e.preventDefault(); setFooterSent(true); }} className="mt-5 space-y-2">
+                <input required placeholder="First name" className="w-full rounded-full px-4 py-2.5 bg-white/[0.08] border border-white/15 focus:border-primary focus:outline-none transition text-sm placeholder:text-white/40" />
+                <input required placeholder="Last name" className="w-full rounded-full px-4 py-2.5 bg-white/[0.08] border border-white/15 focus:border-primary focus:outline-none transition text-sm placeholder:text-white/40" />
+                <input required type="email" placeholder="Email address" className="w-full rounded-full px-4 py-2.5 bg-white/[0.08] border border-white/15 focus:border-primary focus:outline-none transition text-sm placeholder:text-white/40" />
+                <button type="submit" className="w-full rounded-full px-4 py-2.5 text-sm font-medium bg-gradient-honey text-primary-foreground shadow-soft hover:shadow-glow hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2">
+                  <Send size={14} /> Subscribe
+                </button>
+              </form>
+            )}
+          </div>
         </div>
 
         <div className="mt-16 pt-8 border-t border-white/10 flex flex-wrap items-center justify-between gap-6">
@@ -878,7 +897,7 @@ function Footer() {
           </p>
           <div className="flex items-center gap-3">
             {[Facebook, Instagram, Linkedin, Twitter].map((I, i) => (
-              <a key={i} href="#" className="h-9 w-9 grid place-items-center rounded-full border border-white/15 hover:bg-primary hover:text-primary-foreground hover:border-primary transition">
+              <a key={i} href="#" aria-label="Social media link" className="h-9 w-9 grid place-items-center rounded-full border border-white/15 hover:bg-primary hover:text-primary-foreground hover:border-primary transition">
                 <I size={14} />
               </a>
             ))}
