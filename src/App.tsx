@@ -309,7 +309,7 @@ function Welcome() {
             <div className="absolute -inset-6 rounded-[2.5rem] bg-gradient-honey opacity-20 blur-2xl" />
             <img
               src={welcome}
-              alt="Founder embracing a young patient"
+              alt="A volunteer embracing a young patient"
               loading="lazy"
               width={1200}
               height={1408}
@@ -727,16 +727,22 @@ function Founder() {
     <section id="founder" className="py-28 lg:py-36">
       <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-[1fr_1.2fr] gap-16 lg:gap-24 items-center">
         <Reveal>
-          <div className="relative">
-            <div className="absolute -inset-6 bg-gradient-honey opacity-20 blur-2xl rounded-[2rem]" />
-            <img
-              src={founder}
-              alt="Angelina Brown, Founder"
-              loading="lazy"
-              width={1200}
-              height={1504}
-              className="relative aspect-[4/5] w-full object-cover rounded-[2rem] shadow-soft"
-            />
+          <div className="relative aspect-[4/5] w-full rounded-[2rem] bg-gradient-honey p-8 lg:p-12 shadow-soft flex flex-col justify-between overflow-hidden group">
+            {/* Decorative background glows */}
+            <div className="absolute -right-16 -bottom-16 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
+            <div className="absolute -left-16 -top-16 h-64 w-64 rounded-full bg-black/5 blur-3xl" />
+            
+            <div className="relative z-10">
+              <span className="text-white/30 text-8xl font-display leading-none select-none">“</span>
+              <p className="text-xl md:text-2xl font-display text-primary-foreground/90 leading-relaxed italic -mt-6">
+                When I was going through chemotherapy, a simple box of comfort items reminded me that I wasn't fighting alone. That spark of hope is what we want to deliver to every patient in America.
+              </p>
+            </div>
+            
+            <div className="relative z-10 border-t border-primary-foreground/10 pt-6">
+              <p className="text-xs uppercase tracking-widest text-primary-foreground/60 font-semibold">Our Mission</p>
+              <p className="text-lg font-display text-primary-foreground mt-1">Comfort. Care. Hope.</p>
+            </div>
           </div>
         </Reveal>
         <Reveal delay={0.15}>
