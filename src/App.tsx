@@ -157,7 +157,7 @@ function Reveal({ children, className = "" }: { children: ReactNode; className?:
 
 function Hero() {
   return (
-    <section id="top" className="relative min-h-[92vh] flex items-center overflow-hidden">
+    <section id="top" className="relative min-h-[92vh] flex flex-col justify-center overflow-hidden">
       <div className="absolute inset-0 bg-cream-glow" />
       <div className="mx-auto max-w-7xl w-full px-6 lg:px-10 pt-28 pb-20 grid lg:grid-cols-[1.1fr_1fr] gap-14 items-center relative">
         <div>
