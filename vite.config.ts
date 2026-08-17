@@ -19,7 +19,10 @@ function removeCrossorigin(): Plugin {
 }
 
 export default defineConfig({
-  base: "./",
+  // Must be an absolute path (not "./") so the router can derive its basename
+  // from BASE_URL. Defaults to a root-domain deploy (Cloudflare); the GitHub
+  // Pages project-path demo overrides it via VITE_BASE (see build:ghpages).
+  base: process.env.VITE_BASE ?? "/",
   resolve: {
     alias: { "@": "/src" },
   },
