@@ -15,6 +15,7 @@ import boxEntertainment from "../assets/box_entertainment.jpg";
 import boxNotes from "../assets/box_notes.jpg";
 import boxResources from "../assets/box_resources.jpg";
 import { PrimaryButton, GhostButton, Eyebrow, Reveal } from "../components/shared";
+import { submitNewsletter } from "../config/forms";
 
 export default function Home() {
   useEffect(() => {
@@ -512,6 +513,24 @@ function FounderTeaser() {
 
 function Newsletter() {
   const [sent, setSent] = useState(false);
+  const [busy, setBusy] = useState(false);
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    setBusy(true);
+    try {
+      await submitNewsletter({
+        firstName: String(fd.get("firstName") || ""),
+        lastName: String(fd.get("lastName") || ""),
+        email: String(fd.get("email") || ""),
+      });
+      setSent(true);
+    } finally {
+      setBusy(false);
+    }
+  }
+
   return (
     <section id="subscribe" className="py-12 md:py-16 lg:py-24">
       <div className="mx-auto max-w-4xl px-6 lg:px-10 text-center">
@@ -527,17 +546,23 @@ function Newsletter() {
           </p>
         </Reveal>
         <Reveal>
-          <form
-            onSubmit={(e) => { e.preventDefault(); setSent(true); }}
-            className="mt-10 grid sm:grid-cols-[1fr_1fr_1.4fr_auto] gap-3 max-w-3xl mx-auto"
-          >
-            <input required placeholder="First name" className="rounded-full px-5 py-3.5 bg-card border border-border/60 focus:border-primary focus:outline-none transition text-sm" />
-            <input required placeholder="Last name" className="rounded-full px-5 py-3.5 bg-card border border-border/60 focus:border-primary focus:outline-none transition text-sm" />
-            <input required type="email" placeholder="Email address" className="rounded-full px-5 py-3.5 bg-card border border-border/60 focus:border-primary focus:outline-none transition text-sm" />
-            <button type="submit" className="rounded-full px-6 py-3.5 text-sm font-medium bg-gradient-honey text-primary-foreground shadow-soft hover:shadow-glow hover:-translate-y-0.5 transition-all inline-flex items-center gap-2 justify-center">
-              <Send size={15} /> {sent ? "Subscribed!" : "Subscribe"}
-            </button>
-          </form>
+          {sent ? (
+            <p className="mt-10 text-lg text-primary font-medium">
+              Thank you for subscribing.
+            </p>
+          ) : (
+            <form
+              onSubmit={onSubmit}
+              className="mt-10 grid sm:grid-cols-[1fr_1fr_1.4fr_auto] gap-3 max-w-3xl mx-auto"
+            >
+              <input required name="firstName" placeholder="First name" className="rounded-full px-5 py-3.5 bg-card border border-border/60 focus:border-primary focus:outline-none transition text-sm" />
+              <input required name="lastName" placeholder="Last name" className="rounded-full px-5 py-3.5 bg-card border border-border/60 focus:border-primary focus:outline-none transition text-sm" />
+              <input required name="email" type="email" placeholder="Email address" className="rounded-full px-5 py-3.5 bg-card border border-border/60 focus:border-primary focus:outline-none transition text-sm" />
+              <button type="submit" disabled={busy} className="rounded-full px-6 py-3.5 text-sm font-medium bg-gradient-honey text-primary-foreground shadow-soft hover:shadow-glow hover:-translate-y-0.5 transition-all inline-flex items-center gap-2 justify-center disabled:opacity-60">
+                <Send size={15} /> {busy ? "Sending…" : "Subscribe"}
+              </button>
+            </form>
+          )}
         </Reveal>
       </div>
     </section>

@@ -56,14 +56,18 @@ export function JotFormEmbed({ formId, title }: { formId: string; title: string 
   }
 
   return (
+    // min-height lives in a class, not inline style: JotForm's embed handler
+    // rewrites the inline style attribute and has been observed setting
+    // height:0px, which would hide the form entirely. A CSS min-height it does
+    // not touch keeps the form usable, and the handler can still grow it.
     <iframe
       id={iframeId}
       title={title}
       src={`${FORM_ORIGIN}${formId}`}
       allow="geolocation; microphone; camera; fullscreen"
       scrolling="no"
-      className="w-full rounded-3xl border-0 bg-transparent"
-      style={{ minWidth: "100%", height: 900 }}
+      className="w-full min-h-[900px] rounded-3xl border-0 bg-transparent"
+      style={{ minWidth: "100%" }}
     />
   );
 }

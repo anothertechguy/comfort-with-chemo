@@ -2,9 +2,28 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Phone, Mail, Send } from "lucide-react";
 import logo from "../assets/logo.png";
+import { submitNewsletter } from "../config/forms";
 
 export function Footer() {
   const [footerSent, setFooterSent] = useState(false);
+  const [busy, setBusy] = useState(false);
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    setBusy(true);
+    try {
+      await submitNewsletter({
+        firstName: String(fd.get("firstName") || ""),
+        lastName: String(fd.get("lastName") || ""),
+        email: String(fd.get("email") || ""),
+      });
+      setFooterSent(true);
+    } finally {
+      setBusy(false);
+    }
+  }
+
   return (
     <footer id="contact" className="bg-[hsl(36,16%,14%)] text-white/80 pt-20 pb-10">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -37,12 +56,12 @@ export function Footer() {
             {footerSent ? (
               <p className="mt-5 text-sm text-primary font-medium">Thanks for subscribing! 🌟</p>
             ) : (
-              <form onSubmit={(e) => { e.preventDefault(); setFooterSent(true); }} className="mt-5 space-y-2">
-                <input required placeholder="First name" className="w-full rounded-full px-4 py-2.5 bg-white/[0.08] border border-white/15 focus:border-primary focus:outline-none transition text-sm placeholder:text-white/40" />
-                <input required placeholder="Last name" className="w-full rounded-full px-4 py-2.5 bg-white/[0.08] border border-white/15 focus:border-primary focus:outline-none transition text-sm placeholder:text-white/40" />
-                <input required type="email" placeholder="Email address" className="w-full rounded-full px-4 py-2.5 bg-white/[0.08] border border-white/15 focus:border-primary focus:outline-none transition text-sm placeholder:text-white/40" />
-                <button type="submit" className="w-full rounded-full px-4 py-2.5 text-sm font-medium bg-gradient-honey text-primary-foreground shadow-soft hover:shadow-glow hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2">
-                  <Send size={14} /> Subscribe
+              <form onSubmit={onSubmit} className="mt-5 space-y-2">
+                <input required name="firstName" placeholder="First name" className="w-full rounded-full px-4 py-2.5 bg-white/[0.08] border border-white/15 focus:border-primary focus:outline-none transition text-sm placeholder:text-white/40" />
+                <input required name="lastName" placeholder="Last name" className="w-full rounded-full px-4 py-2.5 bg-white/[0.08] border border-white/15 focus:border-primary focus:outline-none transition text-sm placeholder:text-white/40" />
+                <input required name="email" type="email" placeholder="Email address" className="w-full rounded-full px-4 py-2.5 bg-white/[0.08] border border-white/15 focus:border-primary focus:outline-none transition text-sm placeholder:text-white/40" />
+                <button type="submit" disabled={busy} className="w-full rounded-full px-4 py-2.5 text-sm font-medium bg-gradient-honey text-primary-foreground shadow-soft hover:shadow-glow hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2 disabled:opacity-60">
+                  <Send size={14} /> {busy ? "Sending…" : "Subscribe"}
                 </button>
               </form>
             )}
