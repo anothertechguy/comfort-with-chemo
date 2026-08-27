@@ -84,8 +84,8 @@ export default function About() {
               </p>
               <p>
                 Today, Comfort With Chemotherapy partners with hospitals, cancer centers,
-                healthcare providers, businesses, volunteers, and donors to ensure that
-                every patient receives more than a box of supplies. They receive a reminder
+                healthcare providers, businesses, and donors to ensure that every patient
+                receives more than a box of supplies. They receive a reminder
                 that they are supported, valued, and never alone in their fight.
               </p>
             </div>
@@ -156,8 +156,8 @@ export default function About() {
               <span className="italic text-gradient-honey">hope and dignity</span>.
             </h2>
             <p className="mt-7 text-lg text-foreground/70 leading-relaxed">
-              Whether you give, volunteer, sponsor a Comfort Care Package, or become a
-              community partner, your support makes a meaningful difference. Together, we
+              Whether you give, sponsor a Comfort Care Package, or become a community
+              partner, your support makes a meaningful difference. Together, we
               can bring hope, dignity, and comfort to cancer patients and their families,
               one package at a time.
             </p>

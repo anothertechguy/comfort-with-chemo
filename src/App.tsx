@@ -6,6 +6,10 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import FounderPage from "./pages/FounderPage";
 import ComfortBoxPage from "./pages/ComfortBoxPage";
+import RequestBox from "./pages/RequestBox";
+import Partner from "./pages/Partner";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfUse from "./pages/TermsOfUse";
 
 function Layout() {
   return (
@@ -29,6 +33,10 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/founder" element={<FounderPage />} />
           <Route path="/comfort-box" element={<ComfortBoxPage />} />
+          <Route path="/request-a-box" element={<RequestBox />} />
+          <Route path="/partner" element={<Partner />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-use" element={<TermsOfUse />} />
           <Route path="*" element={<Home />} />
         </Route>
       </Routes>

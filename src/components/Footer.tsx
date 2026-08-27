@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Phone, Mail, Facebook, Instagram, Linkedin, Twitter, Send } from "lucide-react";
+import { Phone, Mail, Send } from "lucide-react";
 import logo from "../assets/logo.png";
 
 export function Footer() {
@@ -24,15 +24,15 @@ export function Footer() {
             ["About", "/about"], ["Stories of Hope", "/#stories"], ["Comfort Box", "/comfort-box"], ["Meet the Founder", "/founder"],
           ]} />
           <FooterCol title="Get Involved" links={[
-            ["Request a Box", "/#request"], ["Donate", "/#donate"], ["Volunteer", "/#volunteer"], ["Partner With Us", "/#partner"],
+            ["Request a Box", "/request-a-box"], ["Donate", "/#donate"], ["Partner With Us", "/partner"],
           ]} />
           <FooterCol title="Connect" links={[
-            ["Newsletter", "/#subscribe"], ["Contact", "#contact"], ["Privacy Policy", "#"], ["Terms of Use", "#"],
+            ["Newsletter", "/#subscribe"], ["Contact", "#contact"], ["Privacy Policy", "/privacy-policy"], ["Terms of Use", "/terms-of-use"],
           ]} />
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Stay Connected</p>
             <p className="mt-4 text-sm text-white/60 leading-relaxed">
-              Inspiring stories, volunteer opportunities, and ways to help — straight to your inbox.
+              Inspiring stories and ways to help — straight to your inbox.
             </p>
             {footerSent ? (
               <p className="mt-5 text-sm text-primary font-medium">Thanks for subscribing! 🌟</p>
@@ -49,17 +49,10 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-white/10 flex flex-wrap items-center justify-between gap-6">
+        <div className="mt-16 pt-8 border-t border-white/10">
           <p className="text-xs text-white/50">
             © {new Date().getFullYear()} Comfort With Chemotherapy Inc NPF. 501(c)(3) Nonprofit. All rights reserved.
           </p>
-          <div className="flex items-center gap-3">
-            {[Facebook, Instagram, Linkedin, Twitter].map((I, i) => (
-              <a key={i} href="#" aria-label="Social media link" className="h-9 w-9 grid place-items-center rounded-full border border-white/15 hover:bg-primary hover:text-primary-foreground hover:border-primary transition">
-                <I size={14} />
-              </a>
-            ))}
-          </div>
         </div>
       </div>
     </footer>
@@ -73,7 +66,13 @@ function FooterCol({ title, links }: { title: string; links: [string, string][] 
       <ul className="mt-5 space-y-3 text-sm">
         {links.map(([label, href]) => (
           <li key={label}>
-            <Link to={href} className="text-white/70 hover:text-white transition">{label}</Link>
+            {/* The footer itself carries id="contact" and renders on every page, so a
+                bare hash stays a same-page anchor instead of a route-relative link. */}
+            {href.startsWith("#") ? (
+              <a href={href} className="text-white/70 hover:text-white transition">{label}</a>
+            ) : (
+              <Link to={href} className="text-white/70 hover:text-white transition">{label}</Link>
+            )}
           </li>
         ))}
       </ul>

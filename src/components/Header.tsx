@@ -35,15 +35,24 @@ export function Header() {
           <img src={logo} alt="Comfort With Chemotherapy" className="h-11 w-auto" />
         </Link>
         <nav className="hidden lg:flex items-center gap-9 text-sm text-foreground/75">
-          {NAV.map((n) => (
-            <Link key={n.label} to={n.to} className="relative group">
-              <span className="group-hover:text-foreground transition-colors">{n.label}</span>
-              <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary transition-all duration-300 group-hover:w-full" />
-            </Link>
-          ))}
+          {NAV.map((n) =>
+            // The footer (id="contact") is on every page, so keep a bare hash as a
+            // same-page anchor rather than a route-relative link.
+            n.to.startsWith("#") ? (
+              <a key={n.label} href={n.to} className="relative group">
+                <span className="group-hover:text-foreground transition-colors">{n.label}</span>
+                <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary transition-all duration-300 group-hover:w-full" />
+              </a>
+            ) : (
+              <Link key={n.label} to={n.to} className="relative group">
+                <span className="group-hover:text-foreground transition-colors">{n.label}</span>
+                <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary transition-all duration-300 group-hover:w-full" />
+              </Link>
+            )
+          )}
         </nav>
         <div className="hidden lg:flex items-center gap-3">
-          <Link to="/#request" className="text-sm font-medium text-foreground/80 hover:text-foreground transition">
+          <Link to="/request-a-box" className="text-sm font-medium text-foreground/80 hover:text-foreground transition">
             Request a Box
           </Link>
           <PrimaryButton href="/#donate">Donate</PrimaryButton>
@@ -59,11 +68,17 @@ export function Header() {
       {open && (
         <div className="lg:hidden border-t border-border/60 bg-background/95 backdrop-blur-xl animate-fade-down">
           <div className="px-6 py-6 flex flex-col gap-4">
-            {NAV.map((n) => (
-              <Link key={n.label} to={n.to} onClick={() => setOpen(false)} className="text-lg">
-                {n.label}
-              </Link>
-            ))}
+            {NAV.map((n) =>
+              n.to.startsWith("#") ? (
+                <a key={n.label} href={n.to} onClick={() => setOpen(false)} className="text-lg">
+                  {n.label}
+                </a>
+              ) : (
+                <Link key={n.label} to={n.to} onClick={() => setOpen(false)} className="text-lg">
+                  {n.label}
+                </Link>
+              )
+            )}
             <PrimaryButton href="/#donate">Donate Today</PrimaryButton>
           </div>
         </div>

@@ -170,8 +170,8 @@ export default function ComfortBoxPage() {
               face cancer alone.
             </p>
             <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-              <PrimaryButton href="/#request">Request a Comfort Box</PrimaryButton>
-              <GhostButton href="/#donate">Sponsor a Comfort Box</GhostButton>
+              <PrimaryButton href="/request-a-box">Request a Comfort Box</PrimaryButton>
+              <GhostButton href="/partner">Sponsor a Comfort Box</GhostButton>
             </div>
           </Reveal>
         </div>

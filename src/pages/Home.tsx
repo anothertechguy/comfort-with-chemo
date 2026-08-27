@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Heart, HandHeart, Sparkles, ArrowRight, ArrowUpRight,
+  Heart, HandHeart, Sparkles, ArrowUpRight,
   Gift, Users, Leaf, MessageCircle, Coffee, BookOpen, Send,
 } from "lucide-react";
 import heroDiverse from "../assets/hero_diverse.jpg";
 import welcomeChild from "../assets/welcome_child.jpg";
 import ctaDiverse from "../assets/cta_diverse.jpg";
-import testimonialMarisol from "../assets/testimonial_marisol.jpg";
-import testimonialDavid from "../assets/testimonial_david.jpg";
-import testimonialPriya from "../assets/testimonial_priya.jpg";
 import boxComfort from "../assets/box_comfort.jpg";
 import boxSelfCare from "../assets/box_selfcare.jpg";
 import boxHydration from "../assets/box_hydration.jpg";
@@ -28,7 +25,6 @@ export default function Home() {
       <Hero />
       <Welcome />
       <HowWeHelp />
-      <Impact />
       <InsideBox />
       <Stories />
       <WaysToHelp />
@@ -69,22 +65,11 @@ function Hero() {
             className="mt-9 flex flex-wrap items-center gap-4 animate-fade-up"
             style={{ animationDelay: "0.3s" }}
           >
-            <PrimaryButton href="/#request">Request a Comfort Box</PrimaryButton>
+            <PrimaryButton href="/request-a-box">Request a Comfort Box</PrimaryButton>
             <GhostButton href="/#donate">Donate Today</GhostButton>
-            <Link to="/#request" className="text-sm font-medium text-foreground/70 hover:text-foreground underline underline-offset-4 decoration-primary/50 ml-2">
+            <Link to="/request-a-box" className="text-sm font-medium text-foreground/70 hover:text-foreground underline underline-offset-4 decoration-primary/50 ml-2">
               Refer a patient
             </Link>
-          </div>
-          <div
-            className="mt-14 flex items-center gap-6 text-sm text-foreground/60 animate-fade-up"
-            style={{ animationDelay: "0.4s" }}
-          >
-            <div className="flex -space-x-2">
-              {[testimonialMarisol, testimonialDavid, testimonialPriya].map((s, i) => (
-                <img key={i} src={s} alt="" className="h-9 w-9 rounded-full object-cover ring-2 ring-background" />
-              ))}
-            </div>
-            <p><span className="font-semibold text-foreground">TBD</span> patients supported and counting</p>
           </div>
         </div>
 
@@ -92,23 +77,11 @@ function Hero() {
           <div className="relative">
             <img
               src={heroDiverse}
-              alt="A smiling volunteer presenting a comfort box to a patient"
+              alt="A smiling comfort box being delivered to a patient"
               className="w-full aspect-[4/5] object-cover rounded-[2rem] shadow-glow"
               fetchPriority="high"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent rounded-[2rem] pointer-events-none" />
-          </div>
-
-          <div className="absolute -left-6 md:-left-10 bottom-10 bg-card/95 backdrop-blur rounded-2xl p-5 shadow-soft border border-border/60 max-w-[240px]">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-gradient-honey grid place-items-center text-primary-foreground">
-                <Heart size={18} fill="currentColor" />
-              </div>
-              <div>
-                <p className="text-xs uppercase tracking-wider text-foreground/60">Delivered today</p>
-                <p className="text-lg font-semibold">TBD comfort boxes</p>
-              </div>
-            </div>
           </div>
 
           <div className="absolute -right-4 top-10 bg-card/95 backdrop-blur rounded-2xl p-4 shadow-soft border border-border/60 hidden md:block">
@@ -124,7 +97,7 @@ function Hero() {
         <div className="flex gap-14 animate-marquee whitespace-nowrap text-xs uppercase tracking-[0.28em] text-foreground/50">
           {Array.from({ length: 2 }).map((_, r) => (
             <div key={r} className="flex gap-14 shrink-0">
-              {["Personalized", "No Cost to Patients", "501(c)(3) Nonprofit", "Nationwide Delivery", "Volunteer Powered", "Hospital Partnerships", "Faith-Rooted", "Community Care"].map((w, i) => (
+              {["Personalized", "No Cost to Patients", "501(c)(3) Nonprofit", "Nationwide Delivery", "Hospital Partnerships", "Faith-Rooted", "Community Care"].map((w, i) => (
                 <span key={i} className="flex items-center gap-14">
                   {w}
                   <span className="h-1 w-1 rounded-full bg-primary" />
@@ -149,7 +122,7 @@ function Welcome() {
             <div className="absolute -inset-6 rounded-[2.5rem] bg-gradient-honey opacity-20 blur-2xl" />
             <img
               src={welcomeChild}
-              alt="A volunteer reading to a smiling child of color undergoing chemotherapy"
+              alt="An adult reading to a smiling child of color undergoing chemotherapy"
               loading="lazy"
               className="relative aspect-[5/6] w-full object-cover rounded-[2rem] shadow-soft"
             />
@@ -195,7 +168,7 @@ function Welcome() {
 const HELP = [
   { icon: Gift, title: "Personalized Comfort Boxes", body: "Every comfort box is thoughtfully personalized based on each recipient's preferences and treatment journey — as unique as the person receiving it." },
   { icon: Heart, title: "Emotional Support", body: "Sometimes the greatest gift is knowing someone cares. Every box delivers encouragement, hope, and a reminder that no one walks this journey alone." },
-  { icon: Users, title: "Community of Care", body: "We unite volunteers, donors, caregivers, healthcare professionals, and community partners to support individuals and families through chemotherapy." },
+  { icon: Users, title: "Community of Care", body: "We unite donors, caregivers, healthcare professionals, and community partners to support individuals and families through chemotherapy." },
 ];
 
 function HowWeHelp() {
@@ -223,57 +196,7 @@ function HowWeHelp() {
                   </div>
                   <h3 className="mt-6 text-2xl">{h.title}</h3>
                   <p className="mt-4 text-foreground/70 leading-relaxed">{h.body}</p>
-                  <div className="mt-8 flex items-center gap-2 text-sm font-medium text-primary opacity-0 group-hover:opacity-100 translate-x-[-4px] group-hover:translate-x-0 transition-all">
-                    Learn more <ArrowRight size={14} />
-                  </div>
                 </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------- Impact ---------- */
-
-const STATS = [
-  { label: "Comfort Boxes Delivered", value: "TBD" },
-  { label: "Patients Served", value: "TBD" },
-  { label: "Volunteers Engaged", value: "TBD" },
-  { label: "Hospital Partners", value: "TBD" },
-  { label: "States Served", value: "TBD" },
-];
-
-function Impact() {
-  return (
-    <section id="impact" className="py-16 md:py-20 lg:py-28 relative overflow-hidden">
-      <div className="absolute inset-0 bg-cream-glow" />
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 relative">
-        <div className="grid lg:grid-cols-[1fr_1.2fr] gap-14 items-end">
-          <Reveal>
-            <Eyebrow>Our Impact</Eyebrow>
-            <h2 className="mt-5 text-4xl md:text-5xl lg:text-6xl leading-[1.05]">
-              Hope delivered,{" "}
-              <span className="italic text-gradient-honey">every day</span>.
-            </h2>
-          </Reveal>
-          <Reveal>
-            <p className="text-lg text-foreground/70 leading-relaxed">
-              Every comfort box represents more than a package. It represents compassion,
-              encouragement, and a community committed to supporting patients throughout
-              treatment.
-            </p>
-          </Reveal>
-        </div>
-
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-5 gap-px bg-border/60 rounded-3xl overflow-hidden border border-border/60">
-          {STATS.map((s) => (
-            <Reveal key={s.label}>
-              <div className="h-full bg-card p-8 lg:p-10 hover:bg-secondary/50 transition-colors">
-                <p className="text-4xl md:text-5xl font-display text-gradient-honey">{s.value}</p>
-                <p className="mt-3 text-sm text-foreground/70 leading-snug">{s.label}</p>
               </div>
             </Reveal>
           ))}
@@ -291,7 +214,7 @@ const CATEGORIES = [
   { icon: Coffee, label: "Hydration", body: "Herbal teas, insulated bottles, and hydration boosters.", img: boxHydration },
   { icon: Leaf, label: "Relaxation", body: "Aromatherapy, sleep masks, and calming rituals for rest.", img: boxRelaxation },
   { icon: BookOpen, label: "Entertainment", body: "Journals, puzzles, and reading picks for quiet infusion hours.", img: boxEntertainment },
-  { icon: MessageCircle, label: "Inspirational Notes", body: "Handwritten cards from volunteers who've walked this road.", img: boxNotes },
+  { icon: MessageCircle, label: "Inspirational Notes", body: "Handwritten cards of encouragement from those who've walked this road.", img: boxNotes },
   { icon: HandHeart, label: "Helpful Resources", body: "Guides, checklists, and support-network navigation.", img: boxResources },
 ];
 
@@ -375,62 +298,114 @@ function InsideBox() {
 
 /* ---------- Stories ---------- */
 
-const STORIES = [
-  { quote: "The comfort box arrived on my hardest day. Opening it, I felt like a whole community was sitting beside me. I wasn't alone anymore.", name: "Marisol A.", role: "Patient · Stage III", img: testimonialMarisol },
-  { quote: "My son lit up when he opened his box. Something so simple gave him joy in the middle of everything hard. I'll never forget it.", name: "David J.", role: "Parent & Caregiver", img: testimonialDavid },
-  { quote: "Volunteering with CWC changed my life as much as it changed anyone's. Every note, every box, every delivery matters.", name: "Priya K.", role: "Lead Volunteer", img: testimonialPriya },
+/** Real testimonials supplied by the client. Names are real people, so no
+ *  stock or generated portraits are attached to them. */
+const FEATURED_STORIES = [
+  {
+    title: "It Was Truly a Godsend",
+    name: "Charnett Brown",
+    date: null as string | null,
+    paragraphs: [
+      "Hearing the words, 'You have breast cancer,' left me confused and frightened. I was in a new city, with no idea what I needed or where to turn. I shared my diagnosis with a friend, who connected me with Angelina Brown.",
+      "Within a week, a box showed up at my door filled with things I needed right away, like a cookbook, as well as things I didn't realize I would need later, like mouthwash. As I dealt with the side effects of treatment, I would remember that I had candy to help with nausea or mouthwash for my dry mouth.",
+      "It was such a blessing to know that someone cared enough to put together something that could help during such a difficult time. I was so moved by the thoughtfulness behind the boxes that I asked Angelina to send them to my friends who were also going through treatment.",
+      "It was truly a Godsend.",
+    ],
+  },
+  {
+    title: null as string | null,
+    name: "LaVonne Whitlock",
+    date: null as string | null,
+    paragraphs: [
+      "Receiving the breast cancer comfort package was such a meaningful and thoughtful experience for me. During a time that can feel overwhelming, emotional, and uncertain, knowing that someone took the time to put together something specifically to bring comfort and encouragement meant more than words can express.",
+      "Every item in the package reminded me that I am not alone in this journey. It brought a sense of warmth, love, and hope when I truly needed it. The kindness behind the package touched my heart and gave me encouragement to keep moving forward, one day at a time.",
+      "I am deeply grateful for this beautiful gesture. Your generosity and compassion made a difficult season a little brighter. Thank you for reminding me that there are people who care, support, and stand beside those going through breast cancer.",
+      "This comfort package was more than a gift. It was a reminder of hope, strength, and love. I will always be grateful for the thoughtfulness behind it.",
+    ],
+  },
+];
+
+const SHORT_STORIES = [
+  {
+    name: "Janis Carpenter",
+    date: "April 2022",
+    quote: "Thank you so very much for the Comfort Package. It was a joy to receive.",
+  },
+  {
+    name: "Mary F. Leone",
+    date: null as string | null,
+    quote: "Thank you so very much for the wonderful Comfort Package. It is a splendid expression of love, support, and care.",
+  },
+  {
+    name: "Barbara Bowen",
+    date: "February 2023",
+    quote: "Thank you so much for the Comfort Package. The package contained all the things I have been using throughout my treatments. It was clearly put together with love, care, and support.",
+  },
+  {
+    name: "Yolanda Campbell",
+    date: "March 2023",
+    quote: "Thank you for the wonderful package of amazing items that were exactly what I needed. My heart is filled with joy. Many blessings.",
+  },
 ];
 
 function Stories() {
-  const [idx, setIdx] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setIdx((v) => (v + 1) % STORIES.length), 6500);
-    return () => clearInterval(t);
-  }, []);
-  const s = STORIES[idx];
   return (
     <section id="stories" className="py-16 md:py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal>
-          <div className="flex flex-wrap items-end justify-between gap-6 max-w-4xl">
-            <div>
-              <Eyebrow>Stories of Hope</Eyebrow>
-              <h2 className="mt-5 text-4xl md:text-5xl lg:text-6xl leading-[1.05]">
-                Real stories.{" "}
-                <span className="italic text-gradient-honey">Real hope.</span>
-              </h2>
-            </div>
+          <div className="max-w-3xl">
+            <Eyebrow>Stories of Hope</Eyebrow>
+            <h2 className="mt-5 text-4xl md:text-5xl lg:text-6xl leading-[1.05]">
+              Stories of comfort, care, and{" "}
+              <span className="italic text-gradient-honey">hope</span>.
+            </h2>
+            <p className="mt-6 text-lg text-foreground/70 leading-relaxed">
+              In their own words — from the people who received a Comfort Care Package.
+            </p>
           </div>
         </Reveal>
 
-        <div className="mt-14 grid lg:grid-cols-[1fr_1.2fr] gap-10 lg:gap-16 items-center">
-          <div className="relative">
-            <img key={s.img} src={s.img} alt="" loading="lazy" className="w-full aspect-[4/5] object-cover rounded-[2rem] shadow-soft transition-opacity duration-700" />
-          </div>
+        <div className="mt-14 grid lg:grid-cols-2 gap-6 lg:gap-8">
+          {FEATURED_STORIES.map((s) => (
+            <Reveal key={s.name}>
+              <figure className="h-full rounded-3xl bg-card border border-border/60 p-8 lg:p-10 shadow-soft flex flex-col">
+                <span className="text-primary text-5xl font-display leading-none select-none" aria-hidden="true">
+                  &ldquo;
+                </span>
+                {s.title && (
+                  <h3 className="mt-2 text-2xl lg:text-3xl font-display">{s.title}</h3>
+                )}
+                <blockquote className={`${s.title ? "mt-4" : "mt-2"} space-y-4 text-foreground/75 leading-relaxed flex-1`}>
+                  {s.paragraphs.map((p, i) => (
+                    <p key={i}>{p}</p>
+                  ))}
+                </blockquote>
+                <figcaption className="mt-8 pt-6 border-t border-border/60">
+                  <p className="font-medium text-foreground">{s.name}</p>
+                  {s.date && <p className="text-sm text-foreground/60">{s.date}</p>}
+                </figcaption>
+              </figure>
+            </Reveal>
+          ))}
+        </div>
 
-          <div>
-            <blockquote className="text-2xl md:text-3xl lg:text-4xl font-display leading-[1.25] text-foreground/90">
-              <span className="text-primary text-5xl leading-none align-top mr-1">"</span>
-              {s.quote}
-            </blockquote>
-            <div className="mt-8">
-              <p className="text-lg">{s.name}</p>
-              <p className="text-sm text-foreground/60">{s.role}</p>
-            </div>
-            <div className="mt-10 flex items-center gap-3">
-              {STORIES.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setIdx(i)}
-                  aria-label={`Story ${i + 1}`}
-                  className={`h-1.5 rounded-full transition-all ${i === idx ? "w-10 bg-primary" : "w-4 bg-foreground/20 hover:bg-foreground/40"}`}
-                />
-              ))}
-              <Link to="#stories" className="ml-6 text-sm font-medium underline underline-offset-4 decoration-primary/50 hover:text-primary transition">
-                Read more stories
-              </Link>
-            </div>
-          </div>
+        <div className="mt-6 lg:mt-8 grid sm:grid-cols-2 gap-6 lg:gap-8">
+          {SHORT_STORIES.map((s) => (
+            <Reveal key={s.name}>
+              <figure className="h-full rounded-3xl bg-secondary/40 border border-border/60 p-7 lg:p-8 flex flex-col">
+                <blockquote className="text-foreground/80 leading-relaxed flex-1">
+                  <span className="text-primary font-display text-2xl leading-none mr-1" aria-hidden="true">
+                    &ldquo;
+                  </span>
+                  {s.quote}
+                </blockquote>
+                <figcaption className="mt-6 pt-5 border-t border-border/60">
+                  <p className="font-medium text-foreground">{s.name}</p>
+                  {s.date && <p className="text-sm text-foreground/60">{s.date}</p>}
+                </figcaption>
+              </figure>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
@@ -440,10 +415,9 @@ function Stories() {
 /* ---------- Ways to Help ---------- */
 
 const WAYS = [
-  { id: "request", title: "Request a Comfort Box", body: "Receiving chemotherapy can feel overwhelming. Let us provide encouragement and support during your journey.", cta: "Request Support" },
-  { id: "donate", title: "Donate", body: "Every gift helps provide personalized comfort boxes at no cost to patients and families.", cta: "Give Today" },
-  { id: "volunteer", title: "Volunteer", body: "Help pack comfort boxes, write encouraging notes, or assist at community events.", cta: "Volunteer" },
-  { id: "partner", title: "Partner With Us", body: "Hospitals, businesses, foundations, faith organizations, and community groups can help expand our impact.", cta: "Become a Partner" },
+  { id: "request", href: "/request-a-box", title: "Request a Comfort Box", body: "Receiving chemotherapy can feel overwhelming. Let us provide encouragement and support during your journey.", cta: "Request Support" },
+  { id: "donate", href: "/#donate", title: "Donate", body: "Every gift helps provide personalized comfort boxes at no cost to patients and families.", cta: "Give Today" },
+  { id: "partner", href: "/partner", title: "Partner With Us", body: "Hospitals, businesses, foundations, faith organizations, and community groups can help expand our impact.", cta: "Become a Partner" },
 ];
 
 function WaysToHelp() {
@@ -459,17 +433,17 @@ function WaysToHelp() {
             </h2>
           </div>
         </Reveal>
-        <div className="mt-16 grid md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="mt-16 grid md:grid-cols-3 gap-6 lg:gap-8">
           {WAYS.map((w) => (
             <Reveal key={w.id}>
-              <div id={w.id} className="group relative rounded-3xl p-8 lg:p-10 bg-card border border-border/60 overflow-hidden hover:shadow-glow transition-all duration-500">
+              <div id={w.id} className="group relative h-full rounded-3xl p-8 lg:p-10 bg-card border border-border/60 overflow-hidden hover:shadow-glow transition-all duration-500">
                 <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-gradient-honey opacity-0 group-hover:opacity-20 blur-3xl transition-opacity duration-700" />
                 <div className="relative flex flex-col h-full">
                   <p className="text-xs uppercase tracking-widest text-primary font-medium">0{WAYS.indexOf(w) + 1}</p>
-                  <h3 className="mt-3 text-3xl lg:text-4xl">{w.title}</h3>
-                  <p className="mt-4 text-foreground/70 leading-relaxed max-w-md">{w.body}</p>
+                  <h3 className="mt-3 text-2xl lg:text-3xl">{w.title}</h3>
+                  <p className="mt-4 text-foreground/70 leading-relaxed">{w.body}</p>
                   <div className="mt-8">
-                    <PrimaryButton href={`#${w.id}`}>{w.cta}</PrimaryButton>
+                    <PrimaryButton href={w.href}>{w.cta}</PrimaryButton>
                   </div>
                 </div>
               </div>
@@ -548,8 +522,8 @@ function Newsletter() {
             <span className="italic text-gradient-honey">community</span>.
           </h2>
           <p className="mt-6 text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
-            Subscribe for inspiring stories, volunteer opportunities, upcoming events, and
-            ways to bring comfort and hope to individuals and families facing chemotherapy.
+            Subscribe for inspiring stories, upcoming events, and ways to bring comfort and
+            hope to individuals and families facing chemotherapy.
           </p>
         </Reveal>
         <Reveal>
@@ -587,12 +561,11 @@ function FinalCTA() {
               <span className="italic text-gradient-honey">comfort and hope</span>.
             </h2>
             <p className="mt-7 text-lg text-white/80 max-w-xl leading-relaxed">
-              Whether you are requesting support, making a donation, volunteering your
-              time, or becoming a community partner — you help ensure that no one faces
-              chemotherapy alone.
+              Whether you are requesting support, making a donation, or becoming a
+              community partner — you help ensure that no one faces chemotherapy alone.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
-              <PrimaryButton href="/#request">Request a Comfort Box</PrimaryButton>
+              <PrimaryButton href="/request-a-box">Request a Comfort Box</PrimaryButton>
               <Link to="/#donate" className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white border border-white/40 hover:bg-white/10 transition">
                 Donate Today <ArrowUpRight size={16} />
               </Link>
